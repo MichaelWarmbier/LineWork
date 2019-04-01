@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FILENAME_H
 #define FILENAME_H
 
@@ -17,8 +19,8 @@
 using namespace std;
 
 // Global Variables, Constants and Related //
-const int ZERO = .00000000000000001; // Constant value to be returned if slope is ZERO
-const int UNDEFINED = .00000000000000002; // Constant value to be returned if slope is UNDEFINED
+const int ZERO = -2147483647; // Constant value to be returned if slope is ZERO
+const int UNDEFINED = 2147483647; // Constant value to be returned if slope is UNDEFINED
 double lines[4][3]; // Up to four lines can worked with at once
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Output handle
@@ -62,13 +64,12 @@ bool showShapes = true; // When true, output will show info related to quadrilat
 lineType line[4];
 
 double lineType::slope() { // Calculates slope and returns it's value
-	if (b == 0)
+	if (b == 0.0)
 		return UNDEFINED;
-	else if (a == 0)
+	if (a == 0.0)
 		return ZERO;
 	else
-		return -1 * 
-		(a / b);
+		return -1 * (a / b);
 }
 // Following math all done by quad and math teams
 bool lineType::equal(lineType line1, lineType line2) {
